@@ -1,8 +1,11 @@
 def filter_file(input_filename, keyword, output_filename):
     with open(input_filename, 'r', encoding='utf-8') as input_file:
         lines = input_file.readlines()
-    #Обираємо потрібні рядки
-    filtered_lines = [line for line in lines if keyword in line]
+    
+        keyword = keyword.lower()
+    
+    # Обираємо потрібні рядки
+    filtered_lines = [line for line in lines if keyword in line.lower()]
 
     # Записуємо результат у новий файл
     with open(output_filename, 'w', encoding='utf-8') as output_file:
