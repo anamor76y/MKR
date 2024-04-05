@@ -27,17 +27,10 @@ def cleanup_files(input_filename, output_filename):
     ("rur", ["Containing some lines with RUR\n"]),
     ("apple", [])
 ])
+def test_filter_file(create_input_file, cleanup_files, input_filename, output_filename, keyword, expected_lines):
+    filter_file(input_filename, keyword, output_filename)
 
-def filter_file(input_filename, keyword, output_filename):
-    with open(input_filename, 'r', encoding='utf-8') as input_file:
-        lines = input_file.readlines()
-    
-    keyword = keyword.lower()
-    
-    # Обираємо потрібні рядки
-    filtered_lines = [line for line in lines if keyword in line.lower()]
+    with open(output_filename, 'r', encoding='utf-8') as output_file:
+        filtered_lines = output_file.readlines()
 
-    # Записуємо результат у новий файл
-    with open(output_filename, 'w', encoding='utf-8') as output_file:
-        output_file.writelines(filtered_lines)
-
+    assert filtered_lines == expected_lines
